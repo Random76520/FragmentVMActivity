@@ -3,6 +3,7 @@ package edu.temple.diceroll
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.TextView
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 
 class MainActivity : AppCompatActivity() {
@@ -15,6 +16,10 @@ class MainActivity : AppCompatActivity() {
 
         // Retrieve ViewModel
         val viewModel = ViewModelProvider(this)[DiceViewModel::class.java]
+
+        viewModel.getSelectedNumber().observe(this, Observer { dice ->
+            numberDisplay.text = dice.toString()
+        })
 
         // Fragment created using factory method and added dynamically using fragmentTransaction
         // argument is the number of sides the die will have
